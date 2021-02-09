@@ -1,0 +1,56 @@
+.gradientPinkHeaderBg {
+    background: linear-gradient(
+            to right,
+            #6480ef,
+            #7775e8,
+            #806ce8
+    );
+    border-radius: 10px;
+}
+.gradientGreenHeaderBg {
+    background: linear-gradient(to right, #64c9ef, #75e8b8, #6ce8a6);
+    border-radius: 10px;
+}
+.text-white {
+    color: white;
+}
+.justify-content-between {
+    justify-content: space-between;
+}
+.align-items-center {
+    align-items: center;
+}
+.width-full {
+    width: 100%;
+}
+.details_list {
+    padding: 1em 0;
+    margin: 0;
+}
+.details_list li {
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5em;
+}
+#salePrimaryInfo li span:nth-child(1) {
+    font-weight: 500;
+}
+#saleProductsInfo, #salePricesInfo {
+    width: 100%;
+    color: white;
+}
+#saleProductsInfo th, #salePricesInfo tr td:first-child {
+    font-weight: 500;
+}
+#saleProductsInfo th, #salePricesInfo th {
+    border-bottom: 1px solid white;
+}
+#saleProductsInfo th, #saleProductsInfo td,
+#salePricesInfo th, #salePricesInfo td{
+    padding: 1em 0.5em;
+}
+#salePricesInfo #grandTotal {
+    border-top: 1px dotted white;
+}
