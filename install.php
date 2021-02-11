@@ -100,3 +100,8 @@ if (!$CI->db->table_exists(db_prefix().'pos_settings')) {
         'tax_rate' => null
     ]);
 }
+
+// Добавление столбца в staff
+if (!$CI->db->field_exists('pos_branch_id', db_prefix() . 'staff')) {
+    $CI->db->query('ALTER TABLE `' . db_prefix() . 'staff` ADD `pos_branch_id` INT(11) NULL AFTER `email_signature`;');
+}

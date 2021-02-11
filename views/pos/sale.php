@@ -4,22 +4,12 @@
     <div id="pos_page" class="content">
         <div class="row">
             <audio id="scannerBeepSoundClip" preload="auto">
-                <source src="<?php echo module_dir_url(PRODUCTS_MODULE_NAME, 'assets/audio/scanner_beep.mp3')?>"/>
+                <source src="<?php echo module_dir_url(PRODUCTS_MODULE_NAME, 'assets/audio/scanner_beep.mp3') ?>"/>
             </audio>
             <audio id="deleteProductSoundClip" preload="auto">
                 <source
-                    src="<?php echo module_dir_url(PRODUCTS_MODULE_NAME, 'assets/audio/beep-07.mp3')?>" />
+                        src="<?php echo module_dir_url(PRODUCTS_MODULE_NAME, 'assets/audio/beep-07.mp3') ?>"/>
             </audio>
-            <div class="col-md-12">
-                <div class="panel_s">
-                    <div class="panel-body">
-                        <h4 id="currentSelectedBranch" class="no-margin relative">
-                            <?php echo _l('branch') ?>: <span></span>
-                            <i onclick="initPOS()" id="editBranchBtn" class="fa fa-pencil"></i>
-                        </h4>
-                    </div>
-                </div>
-            </div>
             <!-- Orders list -->
             <div class="col-md-6">
                 <div class="panel_s">
@@ -30,41 +20,44 @@
                                     <div class="col-md-12">
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <?php echo render_select('lead_id', $leads, ['id', 'name'], '', !empty(set_value('id')) ? set_value('id') : '', ['title'=> _l('select_lead'), 'class'=>'pos-selectpicker']); ?>
+                                                <?php echo render_select('lead_id', $leads, ['id', 'name'], '', !empty(set_value('id')) ? set_value('id') : '', ['title' => _l('select_lead'), 'class' => 'pos-selectpicker']); ?>
                                             </div>
                                             <div class="col-md-12">
                                                 <button type="button" onclick="init_lead(); "
-                                                    class="btn pos-transparent-btn" data-toggle="modal"
-                                                    data-target="#addCustomer"><i class="fa fa-user-plus"></i><?php echo _l('new_lead'); ?></button>
+                                                        class="btn pos-transparent-btn" data-toggle="modal"
+                                                        data-target="#addCustomer"><i
+                                                            class="fa fa-user-plus"></i><?php echo _l('new_lead'); ?>
+                                                </button>
                                                 <button type="button" class="btn pos-transparent-btn"
-                                                    data-toggle="modal" data-target="#notes-modal"><i
-                                                        class="fa fa-pencil"></i><?php echo _l('note'); ?></button>
+                                                        data-toggle="modal" data-target="#notes-modal"><i
+                                                            class="fa fa-pencil"></i><?php echo _l('note'); ?></button>
                                                 <button type="button" class="btn pos-transparent-btn"
-                                                    data-toggle="modal" data-target="#addShipping"><i
-                                                        class="fa fa-truck"></i><?php echo _l('shipping'); ?></button>
+                                                        data-toggle="modal" data-target="#addShipping"><i
+                                                            class="fa fa-truck"></i><?php echo _l('shipping'); ?>
+                                                </button>
                                                 <button type="button" class="btn pos-transparent-btn"
-                                                    data-toggle="modal" data-target="#addNewProductModal"><i
-                                                        class="fa fa-plus"></i><?php echo _l('item'); ?></button>
+                                                        data-toggle="modal" data-target="#addNewProductModal"><i
+                                                            class="fa fa-plus"></i><?php echo _l('item'); ?></button>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="table-responsive transaction-list">
                                                 <table id="products-table" class="table order-list table-fixed">
                                                     <thead>
-                                                        <tr>
-                                                            <th class="col-sm-3"><?php echo _l('product')?>
-                                                            </th>
-                                                            <th class="col-sm-3"><?php echo _l('quantity')?>
-                                                            </th>
-                                                            <th class="col-sm-2"><?php echo _l('price')?>
-                                                            </th>
-                                                            <th class="col-sm-2"><?php echo _l('discount')?>%
-                                                            </th>
-                                                            <th class="col-sm-1"><?php echo _l('total')?>
-                                                            </th>
-                                                            <th class="col-sm-1"><?php echo _l('action')?>
-                                                            </th>
-                                                        </tr>
+                                                    <tr>
+                                                        <th class="col-sm-3"><?php echo _l('product') ?>
+                                                        </th>
+                                                        <th class="col-sm-3"><?php echo _l('quantity') ?>
+                                                        </th>
+                                                        <th class="col-sm-2"><?php echo _l('price') ?>
+                                                        </th>
+                                                        <th class="col-sm-2"><?php echo _l('discount') ?>%
+                                                        </th>
+                                                        <th class="col-sm-1"><?php echo _l('total') ?>
+                                                        </th>
+                                                        <th class="col-sm-1"><?php echo _l('action') ?>
+                                                        </th>
+                                                    </tr>
                                                     </thead>
                                                     <tbody></tbody>
                                                 </table>
@@ -73,69 +66,69 @@
                                         <div class="row" style="display: none;">
                                             <div class="col-md-2">
                                                 <div class="form-group">
-                                                    <input type="hidden" name="total_qty" />
+                                                    <input type="hidden" name="total_qty"/>
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-group">
-                                                    <input type="hidden" name="total_discount" value="0.00" />
+                                                    <input type="hidden" name="total_discount" value="0.00"/>
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-group">
-                                                    <input type="hidden" name="total_price" />
+                                                    <input type="hidden" name="total_price"/>
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-group">
-                                                    <input type="hidden" name="item" />
-                                                    <input type="hidden" name="order_tax" />
+                                                    <input type="hidden" name="item"/>
+                                                    <input type="hidden" name="order_tax"/>
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-group">
-                                                    <input type="hidden" name="grand_total" />
-                                                    <input type="hidden" name="coupon_discount" />
-                                                    <input type="hidden" name="sale_status" value="1" />
+                                                    <input type="hidden" name="grand_total"/>
+                                                    <input type="hidden" name="coupon_discount"/>
+                                                    <input type="hidden" name="sale_status" value="1"/>
                                                     <input type="hidden" name="coupon_active">
                                                     <input type="hidden" name="coupon_id">
-                                                    <input type="hidden" name="coupon_discount" />
+                                                    <input type="hidden" name="coupon_discount"/>
 
-                                                    <input type="hidden" name="pos" value="1" />
-                                                    <input type="hidden" name="draft" value="0" />
+                                                    <input type="hidden" name="pos" value="1"/>
+                                                    <input type="hidden" name="draft" value="0"/>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-12 totals"
-                                            style="border-top: 2px solid #e4e6fc; padding-top: 10px;">
+                                             style="border-top: 2px solid #e4e6fc; padding-top: 10px;">
                                             <div class="row" style="border-bottom: 1px solid #f5f5f5">
                                                 <div class="col-sm-4">
-                                                    <span class="totals-title"><?php echo _l('items')?>
+                                                    <span class="totals-title"><?php echo _l('items') ?>
                                                     </span><span id="item">0</span>
                                                 </div>
                                                 <div class="col-sm-4">
-                                                    <span class="totals-title"><?php echo _l('total')?>
+                                                    <span class="totals-title"><?php echo _l('total') ?>
                                                     </span><span id="subtotal">0.00</span>
                                                 </div>
                                                 <div class="col-sm-4">
-                                                    <span class="totals-title"><?php echo _l('discount')?>
+                                                    <span class="totals-title"><?php echo _l('discount') ?>
                                                     </span><span id="discount">0.00</span>
                                                 </div>
                                             </div>
                                             <div class="row" style="border-bottom: 1px solid #f5f5f5">
                                                 <div class="col-sm-4">
-                                                    <span class="totals-title"><?php echo _l('coupon')?>
+                                                    <span class="totals-title"><?php echo _l('coupon') ?>
                                                         <button type="button" class="btn btn-link" data-toggle="modal"
-                                                            data-target="#coupon-modal"><i
-                                                                class="fa fa-pencil"></i></button></span><span
-                                                        id="coupon-text">0.00</span>
+                                                                data-target="#coupon-modal"><i
+                                                                    class="fa fa-pencil"></i></button></span><span
+                                                            id="coupon-text">0.00</span>
                                                 </div>
                                                 <div class="col-sm-4">
-                                                    <span class="totals-title"><?php echo _l('shipping')?>
+                                                    <span class="totals-title"><?php echo _l('shipping') ?>
                                                         <button type="button" class="btn btn-link" data-toggle="modal"
-                                                            data-target="#shipping-cost-modal"><i
-                                                                class="fa fa-pencil"></i></button></span><span
-                                                        id="shipping-cost">0.00</span>
+                                                                data-target="#shipping-cost-modal"><i
+                                                                    class="fa fa-pencil"></i></button></span><span
+                                                            id="shipping-cost">0.00</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -151,12 +144,13 @@
                                 <div class="row">
                                     <div class="column-5 col-md-6">
                                         <button style="background: #0984e3" type="button"
-                                            class="btn btn-custom payment-btn" id="paymentBtn"><i
-                                                class="fa fa-credit-card"></i> <?php echo _l('pay') ?></button>
+                                                class="btn btn-custom payment-btn" id="paymentBtn"><i
+                                                    class="fa fa-credit-card"></i> <?php echo _l('pay') ?></button>
                                     </div>
                                     <div class="column-5 col-md-6">
                                         <button style="background-color: #d63031;" type="button" class="btn btn-custom"
-                                            id="cancel-btn"><i class="fa fa-close"></i> <?php echo _l('cancel') ?></button>
+                                                id="cancel-btn"><i class="fa fa-close"></i> <?php echo _l('cancel') ?>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -166,35 +160,36 @@
             </div>
             <!-- notes modal -->
             <div id="notes-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
-                class="modal fade text-left">
+                 class="modal fade text-left">
                 <div role="document" class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h3 class="modal-title float-left"><?php echo _l('note') ?>
                             </h3>
                             <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span
-                                    aria-hidden="true"><i class="fa fa-times"></i></span></button>
+                                        aria-hidden="true"><i class="fa fa-times"></i></span></button>
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
                                 <textarea type="text" name="notes" class="form-control" rows="10"
-                                    maxlength="200"></textarea>
+                                          maxlength="200"></textarea>
                             </div>
-                            <button type="button" name="notes_btn" class="btn btn-primary" data-dismiss="modal"><?php echo _l('submit') ?></button>
+                            <button type="button" name="notes_btn" class="btn btn-primary"
+                                    data-dismiss="modal"><?php echo _l('submit') ?></button>
                         </div>
                     </div>
                 </div>
             </div>
             <!-- add new product modal -->
             <div id="addNewProductModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                aria-hidden="true" class="modal fade text-left">
+                 aria-hidden="true" class="modal fade text-left">
                 <div role="document" class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h3 class="modal-title float-left"><?php echo _l('new_product') ?>
                             </h3>
                             <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span
-                                    aria-hidden="true"><i class="fa fa-times"></i></span></button>
+                                        aria-hidden="true"><i class="fa fa-times"></i></span></button>
                         </div>
                         <?php echo form_open_multipart('products/pos/add_product'); ?>
                         <div class="modal-body">
@@ -204,27 +199,27 @@
                                     </small><?php echo _l('product_code') ?></label>
                                 <div class="relative">
                                     <input type="text" id="new_product_code" name="new_product_code"
-                                        class="form-control"
-                                        value="<?php echo $product->barcode ?? '' ?>">
+                                           class="form-control"
+                                           value="<?php echo $product->barcode ?? '' ?>">
                                     <span id="productAddBarcodeBtn" class="btn btn-info">
                                         <i>
                                             <svg id="Capa_1" stroke="white" stroke-width="10"
-                                                enable-background="new 0 0 512 512" height="20"
-                                                style="width: 20px; height: 20px; vertical-align: middle;"
-                                                viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg">
+                                                 enable-background="new 0 0 512 512" height="20"
+                                                 style="width: 20px; height: 20px; vertical-align: middle;"
+                                                 viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg">
                                                 <g>
                                                     <path
-                                                        d="m196.992 234.287h-179.497c-9.646 0-17.495 7.848-17.495 17.495v119.687c0 9.646 7.849 17.495 17.495 17.495h179.497c9.646 0 17.494-7.848 17.494-17.495v-119.687c0-9.647-7.847-17.495-17.494-17.495zm2.494 137.182c0 1.375-1.119 2.495-2.494 2.495h-179.497c-1.376 0-2.495-1.119-2.495-2.495v-119.687c0-1.375 1.119-2.495 2.495-2.495h179.497c1.375 0 2.494 1.119 2.494 2.495z" />
+                                                            d="m196.992 234.287h-179.497c-9.646 0-17.495 7.848-17.495 17.495v119.687c0 9.646 7.849 17.495 17.495 17.495h179.497c9.646 0 17.494-7.848 17.494-17.495v-119.687c0-9.647-7.847-17.495-17.494-17.495zm2.494 137.182c0 1.375-1.119 2.495-2.494 2.495h-179.497c-1.376 0-2.495-1.119-2.495-2.495v-119.687c0-1.375 1.119-2.495 2.495-2.495h179.497c1.375 0 2.494 1.119 2.494 2.495z"/>
                                                     <path
-                                                        d="m163.051 265.019c-4.143 0-7.5 3.358-7.5 7.5v78.214c0 4.142 3.357 7.5 7.5 7.5s7.5-3.358 7.5-7.5v-78.214c0-4.143-3.358-7.5-7.5-7.5z" />
+                                                            d="m163.051 265.019c-4.143 0-7.5 3.358-7.5 7.5v78.214c0 4.142 3.357 7.5 7.5 7.5s7.5-3.358 7.5-7.5v-78.214c0-4.143-3.358-7.5-7.5-7.5z"/>
                                                     <path
-                                                        d="m135.147 265.019c-4.143 0-7.5 3.358-7.5 7.5v78.214c0 4.142 3.357 7.5 7.5 7.5s7.5-3.358 7.5-7.5v-78.214c0-4.143-3.357-7.5-7.5-7.5z" />
+                                                            d="m135.147 265.019c-4.143 0-7.5 3.358-7.5 7.5v78.214c0 4.142 3.357 7.5 7.5 7.5s7.5-3.358 7.5-7.5v-78.214c0-4.143-3.357-7.5-7.5-7.5z"/>
                                                     <path
-                                                        d="m107.243 265.019c-4.143 0-7.5 3.358-7.5 7.5v78.214c0 4.142 3.357 7.5 7.5 7.5s7.5-3.358 7.5-7.5v-78.214c0-4.143-3.357-7.5-7.5-7.5z" />
+                                                            d="m107.243 265.019c-4.143 0-7.5 3.358-7.5 7.5v78.214c0 4.142 3.357 7.5 7.5 7.5s7.5-3.358 7.5-7.5v-78.214c0-4.143-3.357-7.5-7.5-7.5z"/>
                                                     <path
-                                                        d="m51.436 265.019c-4.143 0-7.5 3.358-7.5 7.5v78.214c0 4.142 3.357 7.5 7.5 7.5s7.5-3.358 7.5-7.5v-78.214c0-4.143-3.358-7.5-7.5-7.5z" />
+                                                            d="m51.436 265.019c-4.143 0-7.5 3.358-7.5 7.5v78.214c0 4.142 3.357 7.5 7.5 7.5s7.5-3.358 7.5-7.5v-78.214c0-4.143-3.358-7.5-7.5-7.5z"/>
                                                     <path
-                                                        d="m504.5 349.42h-23.53c-21.212 0-38.47 17.258-38.47 38.47v39.58c0 12.941-10.524 23.47-23.46 23.47h-19.39c-16.474 0-29.987-12.894-30.994-29.119l17.764-3.852c20.438-4.437 33.971-23.44 31.472-44.24l-23.227-185.612c14.005-3.713 26.685-11.597 36.248-22.685 11.289-13.089 17.506-29.828 17.506-47.132 0-39.833-32.402-72.24-72.229-72.24h-43.01c-4.143 0-7.5 3.358-7.5 7.5s3.357 7.5 7.5 7.5h43.011c31.557 0 57.229 25.678 57.229 57.24 0 28.315-20.282 52.086-48.227 56.523-2.953.469-5.982.707-9.003.707h-179.73c-6.094 0-11.544-3.632-13.886-9.253l-39.832-95.645c-.904-2.167-.676-4.532.628-6.488 1.306-1.959 3.405-3.083 5.76-3.083h149.05c4.143 0 7.5-3.358 7.5-7.5s-3.357-7.5-7.5-7.5h-149.05c-7.349 0-14.168 3.651-18.242 9.766-2.827 4.242-4.046 9.246-3.585 14.174h-14.723c-4.185 0-8.07 2.08-10.394 5.564-2.324 3.485-2.75 7.874-1.141 11.74l29.809 71.56c1.931 4.693 6.463 7.726 11.546 7.726h24.055l2.272 5.455c4.679 11.229 15.564 18.485 27.732 18.485h67.115c2.868 8.589 4.33 17.631 4.217 26.437-.018 1.374-.068 2.752-.118 4.132-.197 5.434-.4 11.054 1.102 16.902 4.169 16.28 19.189 25.447 31.854 28.597 4.718 1.174 9.674 1.809 15.247 1.942l1.032 8.188c.479 3.792 3.708 6.563 7.432 6.563.313 0 .629-.02.947-.06 4.109-.518 7.021-4.269 6.504-8.378l-10.626-84.323s57.457-.042 58.672-.103l23.167 185.128c1.566 13.038-6.931 24.97-19.764 27.756l-61.608 13.359c-4.602.994-9.329-.127-12.988-3.078-3.656-2.95-5.754-7.335-5.754-12.032v-9.19c0-7.224 5.123-13.579 12.184-15.111l4.642-1.009c13.72-2.966 22.796-15.713 21.106-29.688l-4.62-36.67c-.518-4.109-4.262-7.017-8.379-6.504-4.109.518-7.021 4.269-6.504 8.379l4.616 36.632c.749 6.2-3.287 11.87-9.397 13.191l-4.647 1.01c-13.906 3.018-24 15.538-24 29.769v9.19c0 9.255 4.132 17.896 11.337 23.708 5.485 4.424 12.196 6.761 19.079 6.761 2.162 0 4.341-.23 6.504-.699l29.075-6.305c2.567 22.984 22.108 40.915 45.766 40.915h19.39c21.207 0 38.46-17.257 38.46-38.47v-39.58c0-12.941 10.528-23.47 23.47-23.47h23.53c4.143 0 7.5-3.358 7.5-7.5s-3.359-7.5-7.502-7.5zm-360.427-197.83-27.737-66.59h16.141l27.732 66.59zm169.901 101.857c-3.531-.2-6.724-.658-9.723-1.405-10.639-2.646-18.859-9.618-20.946-17.767-.964-3.75-.808-8.065-.642-12.633.054-1.498.107-2.996.126-4.484.114-8.851-1.097-17.893-3.524-26.627h26.781z" />
+                                                            d="m504.5 349.42h-23.53c-21.212 0-38.47 17.258-38.47 38.47v39.58c0 12.941-10.524 23.47-23.46 23.47h-19.39c-16.474 0-29.987-12.894-30.994-29.119l17.764-3.852c20.438-4.437 33.971-23.44 31.472-44.24l-23.227-185.612c14.005-3.713 26.685-11.597 36.248-22.685 11.289-13.089 17.506-29.828 17.506-47.132 0-39.833-32.402-72.24-72.229-72.24h-43.01c-4.143 0-7.5 3.358-7.5 7.5s3.357 7.5 7.5 7.5h43.011c31.557 0 57.229 25.678 57.229 57.24 0 28.315-20.282 52.086-48.227 56.523-2.953.469-5.982.707-9.003.707h-179.73c-6.094 0-11.544-3.632-13.886-9.253l-39.832-95.645c-.904-2.167-.676-4.532.628-6.488 1.306-1.959 3.405-3.083 5.76-3.083h149.05c4.143 0 7.5-3.358 7.5-7.5s-3.357-7.5-7.5-7.5h-149.05c-7.349 0-14.168 3.651-18.242 9.766-2.827 4.242-4.046 9.246-3.585 14.174h-14.723c-4.185 0-8.07 2.08-10.394 5.564-2.324 3.485-2.75 7.874-1.141 11.74l29.809 71.56c1.931 4.693 6.463 7.726 11.546 7.726h24.055l2.272 5.455c4.679 11.229 15.564 18.485 27.732 18.485h67.115c2.868 8.589 4.33 17.631 4.217 26.437-.018 1.374-.068 2.752-.118 4.132-.197 5.434-.4 11.054 1.102 16.902 4.169 16.28 19.189 25.447 31.854 28.597 4.718 1.174 9.674 1.809 15.247 1.942l1.032 8.188c.479 3.792 3.708 6.563 7.432 6.563.313 0 .629-.02.947-.06 4.109-.518 7.021-4.269 6.504-8.378l-10.626-84.323s57.457-.042 58.672-.103l23.167 185.128c1.566 13.038-6.931 24.97-19.764 27.756l-61.608 13.359c-4.602.994-9.329-.127-12.988-3.078-3.656-2.95-5.754-7.335-5.754-12.032v-9.19c0-7.224 5.123-13.579 12.184-15.111l4.642-1.009c13.72-2.966 22.796-15.713 21.106-29.688l-4.62-36.67c-.518-4.109-4.262-7.017-8.379-6.504-4.109.518-7.021 4.269-6.504 8.379l4.616 36.632c.749 6.2-3.287 11.87-9.397 13.191l-4.647 1.01c-13.906 3.018-24 15.538-24 29.769v9.19c0 9.255 4.132 17.896 11.337 23.708 5.485 4.424 12.196 6.761 19.079 6.761 2.162 0 4.341-.23 6.504-.699l29.075-6.305c2.567 22.984 22.108 40.915 45.766 40.915h19.39c21.207 0 38.46-17.257 38.46-38.47v-39.58c0-12.941 10.528-23.47 23.47-23.47h23.53c4.143 0 7.5-3.358 7.5-7.5s-3.359-7.5-7.502-7.5zm-360.427-197.83-27.737-66.59h16.141l27.732 66.59zm169.901 101.857c-3.531-.2-6.724-.658-9.723-1.405-10.639-2.646-18.859-9.618-20.946-17.767-.964-3.75-.808-8.065-.642-12.633.054-1.498.107-2.996.126-4.484.114-8.851-1.097-17.893-3.524-26.627h26.781z"/>
                                                 </g>
                                             </svg>
                                         </i>
@@ -256,17 +251,19 @@
                                     <div class="attachment">
                                         <div class="form-group">
                                             <label for="attachment" class="control-label"><small
-                                                    class="req text-danger">* </small><?php echo _l('product_image'); ?></label>
+                                                        class="req text-danger">* </small><?php echo _l('product_image'); ?>
+                                            </label>
                                             <input type="file" extension="png,jpg,jpeg,gif"
-                                                filesize="<?php echo file_upload_max_size(); ?>"
-                                                class="form-control" name="product" id="product" required>
+                                                   filesize="<?php echo file_upload_max_size(); ?>"
+                                                   class="form-control" name="product" id="product" required>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo _l("Close");?></button>
+                            <button type="button" class="btn btn-default"
+                                    data-dismiss="modal"><?php echo _l("Close"); ?></button>
                             <button type="submit" class="btn btn-info pull-right"><?php echo _l('submit'); ?></button>
                         </div>
                         <?php echo form_close(); ?>
@@ -275,59 +272,61 @@
             </div>
             <!-- payment modal -->
             <div id="add-payment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
-                class="modal fade text-left">
+                 class="modal fade text-left">
                 <div role="document" class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h3 id="exampleModalLabel" class="modal-title float-left"><?php echo _l('finalize_sale') ?>
                             </h3>
                             <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span
-                                    aria-hidden="true"><i class="fa fa-times"></i></span></button>
+                                        aria-hidden="true"><i class="fa fa-times"></i></span></button>
                         </div>
-                        <?php echo form_open('products/pos/add_sale', ['id'=>'pos-payment-form', 'method'=>'post', 'files'=>true,'class'=>'pos-payment-form' ]); ?>
+                        <?php echo form_open('products/pos/add_sale', ['id' => 'pos-payment-form', 'method' => 'post', 'files' => true, 'class' => 'pos-payment-form']); ?>
                         <div class="modal-body">
                             <div class="form-group">
-                                <h2 id="customerName"><?php echo _l("lead");?>:
+                                <h2 id="customerName"><?php echo _l("lead"); ?>:
                                     <span></span>
                                 </h2>
                             </div>
                             <div class="form-group">
-                                <p id="sale_notes"><?php echo _l("note");?>:
+                                <p id="sale_notes"><?php echo _l("note"); ?>:
                                     <span></span>
                                 </p>
                             </div>
                             <div class="form-group">
-                                <h3 id="ItemsNum2"><span>0</span> <?php echo _l("item(s)");?>
+                                <h3 id="ItemsNum2"><span>0</span> <?php echo _l("item(s)"); ?>
                                 </h3>
                             </div>
                             <div class="form-group">
-                                <h2 id="TotalModal"><?php echo _l('total')?>
+                                <h2 id="TotalModal"><?php echo _l('total') ?>
                                     <span></span>
                                 </h2>
                             </div>
                             <div class="form-group">
-                                <label for="paymentMethod"><?php echo _l("payment_method");?></label>
+                                <label for="paymentMethod"><?php echo _l("payment_method"); ?></label>
                                 <select class="js-select-options form-control" id="paymentMethod">
-                                    <option value="0"><?php echo _l("cash");?>
+                                    <option value="0"><?php echo _l("cash"); ?>
                                     </option>
                                 </select>
                             </div>
                             <div class="form-group Paid">
-                                <label for="Paid"><?php echo _l("paid");?></label>
+                                <label for="Paid"><?php echo _l("paid"); ?></label>
                                 <input onkeypress="return event.charCode >= 48 && event.charCode <= 57" type="text"
-                                    value="0" name="paid" class="form-control" id="paidModalInput"
-                                    placeholder="<?php echo _l("paid");?>">
+                                       value="0" name="paid" class="form-control" id="paidModalInput"
+                                       placeholder="<?php echo _l("paid"); ?>">
                             </div>
                             <div class="form-group ReturnChange">
-                                <h3 id="ReturnChange"><?php echo _l("change");?>
-                                    <span>0</span> <?php echo get_option('product_currency')?>
+                                <h3 id="ReturnChange"><?php echo _l("change"); ?>
+                                    <span>0</span> <?php echo get_option('product_currency') ?>
                                 </h3>
                             </div>
                             <div class="clearfix"></div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo _l("close");?></button>
-                            <button type="button" class="btn btn-primary" id="saleBtn" onclick="posSale()"><?php echo _l("submit");?></button>
+                            <button type="button" class="btn btn-default"
+                                    data-dismiss="modal"><?php echo _l("close"); ?></button>
+                            <button type="button" class="btn btn-primary" id="saleBtn"
+                                    onclick="posSale()"><?php echo _l("submit"); ?></button>
                         </div>
                         <?php echo form_close(); ?>
                     </div>
@@ -335,42 +334,43 @@
             </div>
             <!-- coupon modal -->
             <div id="coupon-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
-                class="modal fade text-left">
+                 class="modal fade text-left">
                 <div role="document" class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h3 class="modal-title float-left"><?php echo _l('coupon_code') ?>
                             </h3>
                             <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span
-                                    aria-hidden="true"><i class="fa fa-times"></i></span></button>
+                                        aria-hidden="true"><i class="fa fa-times"></i></span></button>
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
                                 <input type="text" id="coupon-code" class="form-control"
-                                    placeholder="<?php echo _l('coupon_code') ?>...">
+                                       placeholder="<?php echo _l('coupon_code') ?>...">
                             </div>
-                            <button type="button" class="btn btn-primary coupon-check" data-dismiss="modal"><?php echo _l('submit') ?></button>
+                            <button type="button" class="btn btn-primary coupon-check"
+                                    data-dismiss="modal"><?php echo _l('submit') ?></button>
                         </div>
                     </div>
                 </div>
             </div>
             <!-- shipping_cost modal -->
             <div id="shipping-cost-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                aria-hidden="true" class="modal fade text-left">
+                 aria-hidden="true" class="modal fade text-left">
                 <div role="document" class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h3 class="modal-title float-left"><?php echo _l('shipping_cost') ?>
                             </h3>
                             <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span
-                                    aria-hidden="true"><i class="fa fa-times"></i></span></button>
+                                        aria-hidden="true"><i class="fa fa-times"></i></span></button>
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
                                 <input type="text" name="shipping_cost" class="form-control numkey" step="any">
                             </div>
                             <button type="button" name="shipping_cost_btn" class="btn btn-primary"
-                                data-dismiss="modal"><?php echo _l('submit') ?></button>
+                                    data-dismiss="modal"><?php echo _l('submit') ?></button>
                         </div>
                     </div>
                 </div>
@@ -381,23 +381,24 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                    aria-hidden="true">&times;</span></button>
-                            <h3 class="modal-title float-left" id="ticket"><?php echo _l("receipt");?>
+                                        aria-hidden="true">&times;</span></button>
+                            <h3 class="modal-title float-left" id="ticket"><?php echo _l("receipt"); ?>
                             </h3>
                         </div>
                         <div class="modal-body" id="modal-body">
                             <div id="printSection">
                                 <!-- Ticket goes here -->
                                 <center>
-                                    <h1 style="color:#34495E"><?php echo _l("empty");?>
+                                    <h1 style="color:#34495E"><?php echo _l("empty"); ?>
                                     </h1>
                                 </center>
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default hiddenpr modal-close"
-                                data-dismiss="modal"><?php echo _l("сlose");?></button>
-                            <button type="button" class="btn btn-add hiddenpr" onclick="PrintTicket()"><?php echo _l("print");?></button>
+                                    data-dismiss="modal"><?php echo _l("сlose"); ?></button>
+                            <button type="button" class="btn btn-add hiddenpr"
+                                    onclick="PrintTicket()"><?php echo _l("print"); ?></button>
                         </div>
                         <div id="elementH"></div>
                     </div>
@@ -439,33 +440,33 @@
                                         <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
                                             <li class="nav-item">
                                                 <a id="btnCalculator" data-toggle="modal"
-                                                    data-target="#calculator_modal"><i class="fa fa-calculator"></i>
-                                                    <?php echo _l('calculator')?></a>
+                                                   data-target="#calculator_modal"><i class="fa fa-calculator"></i>
+                                                    <?php echo _l('calculator') ?></a>
                                             </li>
                                             <li class="nav-item">
                                                 <a id="btnBarcodeReader">
                                                     <i>
                                                         <svg id="Capa_1" enable-background="new 0 0 512 512" height="20"
-                                                            style="width: 20px; height: 20px; vertical-align: middle;"
-                                                            viewBox="0 0 512 512" width="512"
-                                                            xmlns="http://www.w3.org/2000/svg">
+                                                             style="width: 20px; height: 20px; vertical-align: middle;"
+                                                             viewBox="0 0 512 512" width="512"
+                                                             xmlns="http://www.w3.org/2000/svg">
                                                             <g>
                                                                 <path
-                                                                    d="m196.992 234.287h-179.497c-9.646 0-17.495 7.848-17.495 17.495v119.687c0 9.646 7.849 17.495 17.495 17.495h179.497c9.646 0 17.494-7.848 17.494-17.495v-119.687c0-9.647-7.847-17.495-17.494-17.495zm2.494 137.182c0 1.375-1.119 2.495-2.494 2.495h-179.497c-1.376 0-2.495-1.119-2.495-2.495v-119.687c0-1.375 1.119-2.495 2.495-2.495h179.497c1.375 0 2.494 1.119 2.494 2.495z" />
+                                                                        d="m196.992 234.287h-179.497c-9.646 0-17.495 7.848-17.495 17.495v119.687c0 9.646 7.849 17.495 17.495 17.495h179.497c9.646 0 17.494-7.848 17.494-17.495v-119.687c0-9.647-7.847-17.495-17.494-17.495zm2.494 137.182c0 1.375-1.119 2.495-2.494 2.495h-179.497c-1.376 0-2.495-1.119-2.495-2.495v-119.687c0-1.375 1.119-2.495 2.495-2.495h179.497c1.375 0 2.494 1.119 2.494 2.495z"/>
                                                                 <path
-                                                                    d="m163.051 265.019c-4.143 0-7.5 3.358-7.5 7.5v78.214c0 4.142 3.357 7.5 7.5 7.5s7.5-3.358 7.5-7.5v-78.214c0-4.143-3.358-7.5-7.5-7.5z" />
+                                                                        d="m163.051 265.019c-4.143 0-7.5 3.358-7.5 7.5v78.214c0 4.142 3.357 7.5 7.5 7.5s7.5-3.358 7.5-7.5v-78.214c0-4.143-3.358-7.5-7.5-7.5z"/>
                                                                 <path
-                                                                    d="m135.147 265.019c-4.143 0-7.5 3.358-7.5 7.5v78.214c0 4.142 3.357 7.5 7.5 7.5s7.5-3.358 7.5-7.5v-78.214c0-4.143-3.357-7.5-7.5-7.5z" />
+                                                                        d="m135.147 265.019c-4.143 0-7.5 3.358-7.5 7.5v78.214c0 4.142 3.357 7.5 7.5 7.5s7.5-3.358 7.5-7.5v-78.214c0-4.143-3.357-7.5-7.5-7.5z"/>
                                                                 <path
-                                                                    d="m107.243 265.019c-4.143 0-7.5 3.358-7.5 7.5v78.214c0 4.142 3.357 7.5 7.5 7.5s7.5-3.358 7.5-7.5v-78.214c0-4.143-3.357-7.5-7.5-7.5z" />
+                                                                        d="m107.243 265.019c-4.143 0-7.5 3.358-7.5 7.5v78.214c0 4.142 3.357 7.5 7.5 7.5s7.5-3.358 7.5-7.5v-78.214c0-4.143-3.357-7.5-7.5-7.5z"/>
                                                                 <path
-                                                                    d="m51.436 265.019c-4.143 0-7.5 3.358-7.5 7.5v78.214c0 4.142 3.357 7.5 7.5 7.5s7.5-3.358 7.5-7.5v-78.214c0-4.143-3.358-7.5-7.5-7.5z" />
+                                                                        d="m51.436 265.019c-4.143 0-7.5 3.358-7.5 7.5v78.214c0 4.142 3.357 7.5 7.5 7.5s7.5-3.358 7.5-7.5v-78.214c0-4.143-3.358-7.5-7.5-7.5z"/>
                                                                 <path
-                                                                    d="m504.5 349.42h-23.53c-21.212 0-38.47 17.258-38.47 38.47v39.58c0 12.941-10.524 23.47-23.46 23.47h-19.39c-16.474 0-29.987-12.894-30.994-29.119l17.764-3.852c20.438-4.437 33.971-23.44 31.472-44.24l-23.227-185.612c14.005-3.713 26.685-11.597 36.248-22.685 11.289-13.089 17.506-29.828 17.506-47.132 0-39.833-32.402-72.24-72.229-72.24h-43.01c-4.143 0-7.5 3.358-7.5 7.5s3.357 7.5 7.5 7.5h43.011c31.557 0 57.229 25.678 57.229 57.24 0 28.315-20.282 52.086-48.227 56.523-2.953.469-5.982.707-9.003.707h-179.73c-6.094 0-11.544-3.632-13.886-9.253l-39.832-95.645c-.904-2.167-.676-4.532.628-6.488 1.306-1.959 3.405-3.083 5.76-3.083h149.05c4.143 0 7.5-3.358 7.5-7.5s-3.357-7.5-7.5-7.5h-149.05c-7.349 0-14.168 3.651-18.242 9.766-2.827 4.242-4.046 9.246-3.585 14.174h-14.723c-4.185 0-8.07 2.08-10.394 5.564-2.324 3.485-2.75 7.874-1.141 11.74l29.809 71.56c1.931 4.693 6.463 7.726 11.546 7.726h24.055l2.272 5.455c4.679 11.229 15.564 18.485 27.732 18.485h67.115c2.868 8.589 4.33 17.631 4.217 26.437-.018 1.374-.068 2.752-.118 4.132-.197 5.434-.4 11.054 1.102 16.902 4.169 16.28 19.189 25.447 31.854 28.597 4.718 1.174 9.674 1.809 15.247 1.942l1.032 8.188c.479 3.792 3.708 6.563 7.432 6.563.313 0 .629-.02.947-.06 4.109-.518 7.021-4.269 6.504-8.378l-10.626-84.323s57.457-.042 58.672-.103l23.167 185.128c1.566 13.038-6.931 24.97-19.764 27.756l-61.608 13.359c-4.602.994-9.329-.127-12.988-3.078-3.656-2.95-5.754-7.335-5.754-12.032v-9.19c0-7.224 5.123-13.579 12.184-15.111l4.642-1.009c13.72-2.966 22.796-15.713 21.106-29.688l-4.62-36.67c-.518-4.109-4.262-7.017-8.379-6.504-4.109.518-7.021 4.269-6.504 8.379l4.616 36.632c.749 6.2-3.287 11.87-9.397 13.191l-4.647 1.01c-13.906 3.018-24 15.538-24 29.769v9.19c0 9.255 4.132 17.896 11.337 23.708 5.485 4.424 12.196 6.761 19.079 6.761 2.162 0 4.341-.23 6.504-.699l29.075-6.305c2.567 22.984 22.108 40.915 45.766 40.915h19.39c21.207 0 38.46-17.257 38.46-38.47v-39.58c0-12.941 10.528-23.47 23.47-23.47h23.53c4.143 0 7.5-3.358 7.5-7.5s-3.359-7.5-7.502-7.5zm-360.427-197.83-27.737-66.59h16.141l27.732 66.59zm169.901 101.857c-3.531-.2-6.724-.658-9.723-1.405-10.639-2.646-18.859-9.618-20.946-17.767-.964-3.75-.808-8.065-.642-12.633.054-1.498.107-2.996.126-4.484.114-8.851-1.097-17.893-3.524-26.627h26.781z" />
+                                                                        d="m504.5 349.42h-23.53c-21.212 0-38.47 17.258-38.47 38.47v39.58c0 12.941-10.524 23.47-23.46 23.47h-19.39c-16.474 0-29.987-12.894-30.994-29.119l17.764-3.852c20.438-4.437 33.971-23.44 31.472-44.24l-23.227-185.612c14.005-3.713 26.685-11.597 36.248-22.685 11.289-13.089 17.506-29.828 17.506-47.132 0-39.833-32.402-72.24-72.229-72.24h-43.01c-4.143 0-7.5 3.358-7.5 7.5s3.357 7.5 7.5 7.5h43.011c31.557 0 57.229 25.678 57.229 57.24 0 28.315-20.282 52.086-48.227 56.523-2.953.469-5.982.707-9.003.707h-179.73c-6.094 0-11.544-3.632-13.886-9.253l-39.832-95.645c-.904-2.167-.676-4.532.628-6.488 1.306-1.959 3.405-3.083 5.76-3.083h149.05c4.143 0 7.5-3.358 7.5-7.5s-3.357-7.5-7.5-7.5h-149.05c-7.349 0-14.168 3.651-18.242 9.766-2.827 4.242-4.046 9.246-3.585 14.174h-14.723c-4.185 0-8.07 2.08-10.394 5.564-2.324 3.485-2.75 7.874-1.141 11.74l29.809 71.56c1.931 4.693 6.463 7.726 11.546 7.726h24.055l2.272 5.455c4.679 11.229 15.564 18.485 27.732 18.485h67.115c2.868 8.589 4.33 17.631 4.217 26.437-.018 1.374-.068 2.752-.118 4.132-.197 5.434-.4 11.054 1.102 16.902 4.169 16.28 19.189 25.447 31.854 28.597 4.718 1.174 9.674 1.809 15.247 1.942l1.032 8.188c.479 3.792 3.708 6.563 7.432 6.563.313 0 .629-.02.947-.06 4.109-.518 7.021-4.269 6.504-8.378l-10.626-84.323s57.457-.042 58.672-.103l23.167 185.128c1.566 13.038-6.931 24.97-19.764 27.756l-61.608 13.359c-4.602.994-9.329-.127-12.988-3.078-3.656-2.95-5.754-7.335-5.754-12.032v-9.19c0-7.224 5.123-13.579 12.184-15.111l4.642-1.009c13.72-2.966 22.796-15.713 21.106-29.688l-4.62-36.67c-.518-4.109-4.262-7.017-8.379-6.504-4.109.518-7.021 4.269-6.504 8.379l4.616 36.632c.749 6.2-3.287 11.87-9.397 13.191l-4.647 1.01c-13.906 3.018-24 15.538-24 29.769v9.19c0 9.255 4.132 17.896 11.337 23.708 5.485 4.424 12.196 6.761 19.079 6.761 2.162 0 4.341-.23 6.504-.699l29.075-6.305c2.567 22.984 22.108 40.915 45.766 40.915h19.39c21.207 0 38.46-17.257 38.46-38.47v-39.58c0-12.941 10.528-23.47 23.47-23.47h23.53c4.143 0 7.5-3.358 7.5-7.5s-3.359-7.5-7.502-7.5zm-360.427-197.83-27.737-66.59h16.141l27.732 66.59zm169.901 101.857c-3.531-.2-6.724-.658-9.723-1.405-10.639-2.646-18.859-9.618-20.946-17.767-.964-3.75-.808-8.065-.642-12.633.054-1.498.107-2.996.126-4.484.114-8.851-1.097-17.893-3.524-26.627h26.781z"/>
                                                             </g>
                                                         </svg>
                                                     </i>
-                                                    <?php echo _l('barcode')?>
+                                                    <?php echo _l('barcode') ?>
                                                 </a>
                                             </li>
                                         </ul>
@@ -474,46 +475,51 @@
                             </nav>
                         </header>
                         <div class="row">
-<!--                            <div class="col-md-4">-->
-<!--                                <i class="fa fa-question-circle pull-left" data-toggle="tooltip"-->
-<!--                                    data-title="--><?php //echo _l('branch'); ?><!--"></i>-->
-<!--                                --><?php //echo render_select('branch_id', $branches_list, ['id', 'name'], 'branch', !empty(set_value('branch_id')) ? set_value('branch_id') : $product->branch_id ?? ''); ?>
-<!--                            </div>-->
+                            <!--                            <div class="col-md-4">-->
+                            <!--                                <i class="fa fa-question-circle pull-left" data-toggle="tooltip"-->
+                            <!--                                    data-title="-->
+                            <?php //echo _l('branch'); ?><!--"></i>-->
+                            <!--                                --><?php //echo render_select('branch_id', $branches_list, ['id', 'name'], 'branch', !empty(set_value('branch_id')) ? set_value('branch_id') : $product->branch_id ?? ''); ?>
+                            <!--                            </div>-->
                             <div class="col-md-6">
                                 <i class="fa fa-question-circle pull-left" data-toggle="tooltip"
-                                    data-title="<?php echo _l('first_select_branch'); ?>"></i>
+                                   data-title="<?php echo _l('first_select_branch'); ?>"></i>
                                 <?php echo render_select('category_id', [], ['id', 'name'], 'category', !empty(set_value('category_id')) ? set_value('category_id') : $product->category_id ?? '', ['title' => 'first_select_branch']); ?>
                             </div>
                             <div class="col-md-6">
                                 <i class="fa fa-question-circle pull-left" data-toggle="tooltip"
-                                    data-title="<?php echo _l('first_select_category'); ?>"></i>
+                                   data-title="<?php echo _l('first_select_category'); ?>"></i>
                                 <?php echo render_select('subcategory_id', [], ['id', 'name'], 'subcategory', !empty(set_value('subcategory_id')) ? set_value('subcategory_id') : $product->subcategory_id ?? '', ['title' => 'first_select_category']); ?>
                             </div>
                             <div class="col-md-12 mt-1 table-container">
                                 <div id="products-list">
                                     <input type="text" class="search form-group" id="productSearchBox"
-                                        placeholder="<?php echo _l('search_by') ?>" />
+                                           placeholder="<?php echo _l('search_by') ?>"/>
 
                                     <ul class="list">
                                         <?php for ($i = 0; $i < count($products_list); $i++) { ?>
-                                        <li class="product-img sound-btn"
-                                            title="<?php echo $products_list[$i]['name']?>"
-                                            data-product="<?php echo $products_list[$i]['name'].'***productcode***'. $products_list[$i]['barcode'] ?>">
-                                            <img src="<?php echo module_dir_url('products', 'uploads/' . $products_list[$i]['image_url']) ?>"
-                                                width="100%">
-                                            <p class="productName"><?php echo $products_list[$i]['name']?>
-                                            </p>
-                                            <span><?php echo $products_list[$i]['price']?></span>
-                                            <p class="productBranch" hidden><?php echo $products_list[$i]['branch_id']?>
-                                            </p>
-                                            <p class="productCategory" hidden><?php echo $products_list[$i]['category_id']?>
-                                            </p>
-                                            <p class="productSubCategory" hidden><?php echo $products_list[$i]['subcategory_id']?>
-                                            </p>
-                                            <p class="productCode" hidden><?php echo $products_list[$i]['barcode']?>
-                                            </p>
-                                        </li>
-                                        <?php }?>
+                                            <li class="product-img sound-btn"
+                                                title="<?php echo $products_list[$i]['name'] ?>"
+                                                data-product="<?php echo $products_list[$i]['name'] . '***productcode***' . $products_list[$i]['barcode'] ?>">
+                                                <img src="<?php echo module_dir_url('products', 'uploads/' . $products_list[$i]['image_url']) ?>"
+                                                     width="100%">
+                                                <p class="productName"><?php echo $products_list[$i]['name'] ?>
+                                                </p>
+                                                <span><?php echo $products_list[$i]['price'] ?></span>
+                                                <p class="productBranch"
+                                                   hidden><?php echo $products_list[$i]['branch_id'] ?>
+                                                </p>
+                                                <p class="productCategory"
+                                                   hidden><?php echo $products_list[$i]['category_id'] ?>
+                                                </p>
+                                                <p class="productSubCategory"
+                                                   hidden><?php echo $products_list[$i]['subcategory_id'] ?>
+                                                </p>
+                                                <p class="productCode"
+                                                   hidden><?php echo $products_list[$i]['barcode'] ?>
+                                                </p>
+                                            </li>
+                                        <?php } ?>
                                     </ul>
                                     <ul class="pagination"></ul>
                                 </div>
@@ -538,28 +544,28 @@
 <?php $this->load->view('products/pos/calculator_modal'); ?>
 <?php init_tail(); ?>
 <script
-    src="<?php echo module_dir_url('products', 'assets/js/jquery.redirect.js')?>">
+        src="<?php echo module_dir_url('products', 'assets/js/jquery.redirect.js') ?>">
 </script>
 <script
-    src="<?php echo module_dir_url('products', 'assets/js/jqueryPrint.min.js')?>">
+        src="<?php echo module_dir_url('products', 'assets/js/jqueryPrint.min.js') ?>">
 </script>
 <script
-    src="<?php echo module_dir_url('products', 'assets/js/list.min.js')?>">
+        src="<?php echo module_dir_url('products', 'assets/js/list.min.js') ?>">
 </script>
 <script
-    src="<?php echo module_dir_url('products', 'assets/js/sweetalert.min.js')?>">
+        src="<?php echo module_dir_url('products', 'assets/js/sweetalert.min.js') ?>">
 </script>
 <script
-    src="<?php echo module_dir_url('products', 'assets/js/keyboard.min.js')?>">
+        src="<?php echo module_dir_url('products', 'assets/js/keyboard.min.js') ?>">
 </script>
 <script
-    src="<?php echo module_dir_url('products', 'assets/js/keyboard.extension.all.js')?>">
+        src="<?php echo module_dir_url('products', 'assets/js/keyboard.extension.all.js') ?>">
 </script>
 <script
-    src="<?php echo module_dir_url('products', 'assets/js/barcode/quagga.js')?>">
+        src="<?php echo module_dir_url('products', 'assets/js/barcode/quagga.js') ?>">
 </script>
 <script
-    src="<?php echo module_dir_url('products', 'assets/js/pos.js')?>">
+        src="<?php echo module_dir_url('products', 'assets/js/pos.js') ?>">
 </script>
 
 <script>
@@ -601,7 +607,7 @@
 
         // append a new pos window button and set active status
         $('#posWindowButtons .list').append(
-            `<li class="posWindowN${lastPosWindowIndex} active-pos-window" onclick="goToPosWindow(this)">${lastPosWindowIndex+1}</li>`
+            `<li class="posWindowN${lastPosWindowIndex} active-pos-window" onclick="goToPosWindow(this)">${lastPosWindowIndex + 1}</li>`
         );
 
         // save previous active pos window data
@@ -720,7 +726,7 @@
                 // when a decimal exists in the input area
                 buttonDisabled: 'disabled'
             },
-            change: function(e, keyboard) {
+            change: function (e, keyboard) {
                 keyboard.$el.val(keyboard.$preview.val())
                 keyboard.$el.trigger('propertychange')
             }
@@ -744,7 +750,7 @@
                 // when a decimal exists in the input area
                 buttonDisabled: 'disabled'
             },
-            change: function(e, keyboard) {
+            change: function (e, keyboard) {
                 keyboard.$el.val(keyboard.$preview.val())
                 keyboard.$el.trigger('propertychange')
             }
@@ -768,7 +774,7 @@
                 // when a decimal exists in the input area
                 buttonDisabled: 'disabled'
             },
-            change: function(e, keyboard) {
+            change: function (e, keyboard) {
                 keyboard.$el.val(keyboard.$preview.val())
                 keyboard.$el.trigger('propertychange')
             }
@@ -787,7 +793,7 @@
     }
 
     if (keyboard_active == 1) {
-        $('#productSearchBox').bind('keyboardChange', function(e, keyboard, el) {
+        $('#productSearchBox').bind('keyboardChange', function (e, keyboard, el) {
             var lead_id = $('#lead_id').val();
             temp_data = $('#productSearchBox').val();
             if (!lead_id) {
@@ -796,7 +802,7 @@
                     '<?php echo _l('select_lead'); ?>'
                 );
             } else {
-                productsList.filter(function(pro) {
+                productsList.filter(function (pro) {
                     var ps = false;
                     if (temp_data) {
                         var matcher = new RegExp(".?" + $.ui.autocomplete.escapeRegex(temp_data), "i");
@@ -819,7 +825,7 @@
             }
         });
     } else {
-        $('#productSearchBox').on('input', function() {
+        $('#productSearchBox').on('input', function () {
             var lead_id = $('#lead_id').val();
             if (!lead_id) {
                 $('#productSearchBox').val('');
@@ -828,7 +834,7 @@
                 );
             } else {
                 temp_data = $('#productSearchBox').val();
-                productsList.filter(function(pro) {
+                productsList.filter(function (pro) {
                     var ps = false;
                     if (temp_data) {
                         var matcher = new RegExp(".?" + $.ui.autocomplete.escapeRegex(temp_data), "i");
@@ -855,9 +861,9 @@
 
     var productSearchBox = $('#productSearchBox');
     productSearchBox.autocomplete({
-        source: function(request, response) {
+        source: function (request, response) {
             var matcher = new RegExp(".?" + $.ui.autocomplete.escapeRegex(request.term), "i");
-            response($.map(filteredProductList, function(item) {
+            response($.map(filteredProductList, function (item) {
                 if (matcher.test(item.values().productName + item.values().productCode)) {
                     return {
                         label: item.values().productName,
@@ -866,14 +872,14 @@
                 }
             }));
         },
-        response: function(event, ui) {
+        response: function (event, ui) {
             if (ui.content.length == 1) {
                 var data = ui.content[0].value;
                 $(this).autocomplete("close");
                 productSearch(data);
             }
         },
-        select: function(event, ui) {
+        select: function (event, ui) {
             var data = ui.item.value;
             productSearch(data);
             productSearchBox.val(ui.item.label);
@@ -881,7 +887,7 @@
         },
     });
 
-    $("#lead_id").change(function() {
+    $("#lead_id").change(function () {
         var id = $(this).val();
 
         if (id) {
@@ -889,14 +895,14 @@
         }
     });
 
-    $("#products-table").on('click', '.plus', function() {
+    $("#products-table").on('click', '.plus', function () {
         rowindex = $(this).closest('tr').index();
         var qty = parseFloat($('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ') .qty').val()) + 1;
         $('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ') .qty').val(qty);
         checkQuantity(String(qty), true);
     });
 
-    $("#products-table").on('click', '.minus', function() {
+    $("#products-table").on('click', '.minus', function () {
         rowindex = $(this).closest('tr').index();
         var qty = parseFloat($('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ') .qty').val()) - 1;
         if (qty > 0) {
@@ -907,7 +913,7 @@
         checkQuantity(String(qty), true);
     });
 
-    $("#products-table").on('input', '.qty', function() {
+    $("#products-table").on('input', '.qty', function () {
         rowindex = $(this).closest('tr').index();
         if ($(this).val() < 1 && $(this).val() != '') {
             $('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ') .qty').val(1);
@@ -920,7 +926,7 @@
         }
     });
 
-    $("#products-table").on('focusout', '.qty', function() {
+    $("#products-table").on('focusout', '.qty', function () {
         rowindex = $(this).closest('tr').index();
         if ($(this).val() < 1 || $(this).val() == '') {
             $('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ') .qty').val(1);
@@ -928,7 +934,7 @@
         checkQuantity($(this).val(), true);
     });
 
-    $("#products-table").on('focusout', 'input[name="discount"]', function() {
+    $("#products-table").on('focusout', 'input[name="discount"]', function () {
         rowindex = $(this).closest('tr').index();
         if ($(this).val() < 0 || $(this).val() == '') {
             $('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ') input[name="discount"]').val(0);
@@ -936,16 +942,16 @@
         checkQuantity($('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ') .qty').val(), true);
     });
 
-    $("#products-table").on('click', '.qty', function() {
+    $("#products-table").on('click', '.qty', function () {
         rowindex = $(this).closest('tr').index();
     });
 
-    $(document).on('click', '.sound-btn', function() {
+    $(document).on('click', '.sound-btn', function () {
         var audio = $("#scannerBeepSoundClip")[0];
         audio.play();
     });
 
-    $(document).on('click', '.product-img', function() {
+    $(document).on('click', '.product-img', function () {
         var lead_id = $('#lead_id').val();
         if (!lead_id) {
             Swal.fire(
@@ -958,7 +964,7 @@
         }
     });
 
-    $("table.order-list tbody").on("click", ".ibtnDel", function(event) {
+    $("table.order-list tbody").on("click", ".ibtnDel", function (event) {
         var audio = $("#deleteProductSoundClip")[0];
         audio.play();
         rowindex = $(this).closest('tr').index();
@@ -967,7 +973,7 @@
         calculateTotal();
     });
 
-    $('#category_id').change(function() {
+    $('#category_id').change(function () {
         var id = $(this).val();
         var selector = '';
         if (id) {
@@ -993,35 +999,35 @@
         }
         $('#subcategory_id').html(selector).selectpicker('refresh');
 
-        productsList.filter(function(pro) {
+        productsList.filter(function (pro) {
             if (id) {
-                return pro.values().productBranch == $('#init_branch_id').val() && pro.values()
-                    .productCategory == id;
+                return Number(pro.values().productBranch) == Number(selectedBranchId) && Number(pro.values().productCategory) == Number(id);
             }
-            return pro.values().productBranch == $('#init_branch_id').val();
+            return pro.values().productBranch == selectedBranchId;
         });
+
         filteredProductList = productsList.matchingItems;
 
         return false;
     });
 
-    $('#subcategory_id').change(function() {
+    $('#subcategory_id').change(function () {
         var id = $(this).val();
-        productsList.filter(function(pro) {
+        productsList.filter(function (pro) {
             if (id) {
-                return pro.values().productBranch == $('#init_branch_id').val() && pro.values()
-                    .productCategory == $('#category_id').val() && pro.values().productSubCategory ==
-                    id;
+                return Number(pro.values().productBranch) == Number(selectedBranchId) &&
+                    Number(pro.values().productCategory) == Number($('#category_id').val()) &&
+                    Number(pro.values().productSubCategory) == Number(id);
             }
-            return pro.values().productBranch == $('#init_branch_id').val() && pro.values()
-                .productCategory == $('#category_id').val();
+            return Number(pro.values().productBranch) == Number(selectedBranchId) &&
+                Number(pro.values().productCategory) == Number($('#category_id').val());
         });
         filteredProductList = productsList.matchingItems;
 
         return false;
     });
 
-    $('#paymentBtn').click(function() {
+    $('#paymentBtn').click(function () {
         if (rowindex >= 0) {
             $('#add-payment').modal('show');
         } else {
@@ -1031,27 +1037,30 @@
         }
     });
 
-    $("#paidModalInput").keyup(function() {
+    $("#paidModalInput").keyup(function () {
         calculateChange($(this).val());
     });
 
-    $("#paidModalInput").focusout(function() {
+    $("#paidModalInput").focusout(function () {
         if ($(this).val() == '') {
             $(this).val(0);
         }
         calculateChange($(this).val());
     });
 
-    $('button[name="shipping_cost_btn"]').on("click", function() {
+    $('button[name="shipping_cost_btn"]').on("click", function () {
         calculateGrandTotal();
     });
 
     $('#cancel-btn').click(confirmCancel);
 
+    const selectedBranchId = <?php echo $pos_branch_id ?>;
+    const selectedBranchName = <?php echo $branch_selected->name ?>;
+
     async function initPOS() {
-        const { value: formValues } = await Swal.fire({
+        const {value: formValues} = await Swal.fire({
             title: '<?php echo _l('enter_branch'); ?>',
-            html:`<div class="form-group select-placeholder">
+            html: `<div class="form-group select-placeholder">
                         <select id="init_branch_id" name="init_branch_id" class="selectpicker" data-width="100%" data-none-selected-text="<?php echo _l('dropdown_non_selected_tex'); ?>">
                             <option value=""></option>
                             <?php foreach($branches_list as $branch){ ?>
@@ -1062,20 +1071,17 @@
             focusConfirm: false,
             confirmButtonText: '<?php echo _l('continue') ?>&nbsp;<i class="fa fa-arrow-right"></i>',
             preConfirm: () => {
-                if($('#init_branch_id').val() != '') {
-                    var id = $('#init_branch_id').val();
-                    var name = $('#init_branch_id').find(':selected').text();
-                    $('#currentSelectedBranch span').text(name);
-                    localStorage.setItem("selectedBranchId", id);
-                    localStorage.setItem("selectedBranchName", name);
+                if (selectedBranchId != '') {
+                    var id = selectedBranchId;
+                    var name = selectedBranchName;
                     return id;
                 }
                 return false;
             },
             allowOutsideClick: false,
             didOpen: () => {
-                if(localStorage.getItem("selectedBranchId")) {
-                    $('#init_branch_id').selectpicker('val', localStorage.getItem("selectedBranchId"));
+                if (selectedBranchId) {
+                    $('#init_branch_id').selectpicker('val', selectedBranchId);
                 }
                 $('#init_branch_id').selectpicker('refresh');
             }
@@ -1085,10 +1091,11 @@
             selectBranch(formValues);
         }
     }
-    if(localStorage.getItem("selectedBranchId")) {
-        selectBranch(localStorage.getItem("selectedBranchId"));
-        $('#currentSelectedBranch span').text(localStorage.getItem("selectedBranchName"))
-    }else{
+
+    if (selectedBranchId) {
+        selectBranch(selectedBranchId);
+        $('#currentSelectedBranch span').text(selectedBranchName)
+    } else {
         initPOS();
     }
 
@@ -1213,7 +1220,7 @@
     function calculateTotal() {
         //Sum of quantity
         var total_qty = 0;
-        $("table.order-list tbody .qty").each(function(index) {
+        $("table.order-list tbody .qty").each(function (index) {
             if ($(this).val() == '') {
                 total_qty += 0;
             } else {
@@ -1224,7 +1231,7 @@
 
         //Sum of discount
         var total_discount = 0;
-        $("table.order-list tbody tr .total_discount").each(function() {
+        $("table.order-list tbody tr .total_discount").each(function () {
             total_discount += parseFloat($(this).val());
         });
 
@@ -1232,7 +1239,7 @@
 
         //Sum of subtotal
         var total = 0;
-        $(".sub-total").each(function() {
+        $(".sub-total").each(function () {
             total += parseFloat($(this).text());
         });
         $('input[name="total_price"]').val(total.toFixed(2));
@@ -1299,7 +1306,7 @@
     function posSale() {
         var leadId = $('#lead_id').val();
         var leadName = $('#lead_id').find('option:selected').text();
-        var branchId = localStorage.getItem('selectedBranchId');
+        var branchId = selectedBranchId;
         var itemsNumber = $('input[name="item"]').val();
         var totalQuantity = $('input[name="total_qty"]').val();
         var totalDiscount = $('.total_discount').val();
@@ -1319,7 +1326,7 @@
         var productQuantities = [];
         var productDiscounts = [];
         var productTotalPrices = [];
-        $('table.order-list tbody tr').each(function() {
+        $('table.order-list tbody tr').each(function () {
             productIds.push($(this).find('.product-id').val());
             productNames.push($(this).find('.product-name').text());
             productQuantities.push($(this).find('.qty').val());
@@ -1353,12 +1360,12 @@
                 product_discounts: productDiscounts,
                 product_total_prices: productTotalPrices
             },
-            success: function(data) {
+            success: function (data) {
                 $('#printSection').html(data);
                 $('#add-payment').modal('hide');
                 $('#ticket').modal('show');
             },
-            error: function(jqXHR, textStatus, errorThrown) {
+            error: function (jqXHR, textStatus, errorThrown) {
                 Swal.fire('Error!');
             }
         });
@@ -1399,13 +1406,13 @@
     //
     function order_by_occurence(arr) {
         var counts = {};
-        arr.forEach(function(value) {
+        arr.forEach(function (value) {
             if (!counts[value]) {
                 counts[value] = 0;
             }
             counts[value]++;
         });
-        return Object.keys(counts).sort(function(curKey, nextKey) {
+        return Object.keys(counts).sort(function (curKey, nextKey) {
             return counts[nextKey] - counts[curKey];
         });
     }
@@ -1414,10 +1421,10 @@
         var Quagga = window.Quagga;
         var App = {
             _scanner: null,
-            init: function() {
+            init: function () {
                 this.attachListeners();
             },
-            activateScanner: function(addingNew) {
+            activateScanner: function (addingNew) {
                 var last_results = [];
                 var scanner = this.configureScanner('#interactive'),
                     onDetected = function (result) {
@@ -1434,7 +1441,7 @@
                                 } else {
                                     $('#productSearchBox').val(accurateCode);
                                     productSearch(accurateCode);
-                                    productsList.filter(function(pro) {
+                                    productsList.filter(function (pro) {
                                         return pro.values().productCode.includes(accurateCode);
                                     });
                                 }
@@ -1442,7 +1449,7 @@
                             }
                         }
                     }.bind(this),
-                    stop = function() {
+                    stop = function () {
                         scanner.stop();  // should also clear all event-listeners?
                         scanner.removeEventListener('detected', onDetected);
                         this.hideOverlay();
@@ -1450,22 +1457,22 @@
                     }.bind(this);
 
                 this.showOverlay(stop);
-                scanner.addEventListener('detected', onDetected).start().then(function (success){
+                scanner.addEventListener('detected', onDetected).start().then(function (success) {
                     console.log("success");
-                }, function (err){
-                    if(err) {
+                }, function (err) {
+                    if (err) {
                         $('#livestream_scanner .modal-body .error').html('<div class="alert alert-danger"><strong><i class="fa fa-exclamation-triangle"></i><?php echo _l('NotFoundError') ?></strong>: <?php echo _l('DeviceNotFound') ?></div>');
                     }
                 });
             },
-            attachListeners: function() {
+            attachListeners: function () {
                 var self = this;
                 btnBarcodeReader = document.querySelector('#btnBarcodeReader');
                 productAddBarcodeBtn = document.querySelector('#productAddBarcodeBtn');
 
 
                 btnBarcodeReader.addEventListener("click", function onClick(e) {
-                    if(!$('#lead_id').val()){
+                    if (!$('#lead_id').val()) {
                         $('#productSearchBox').val('');
                         Swal.fire(
                             '<?php echo _l('select_lead'); ?>'
@@ -1484,17 +1491,17 @@
                 });
 
             },
-            showOverlay: function(cancelCb) {
+            showOverlay: function (cancelCb) {
                 $('#livestream_scanner button.mclose').on('click', function closeClick() {
                     $(this).unbind('click', closeClick);
                     cancelCb();
                 });
                 $('#livestream_scanner').modal('show');
             },
-            hideOverlay: function() {
+            hideOverlay: function () {
                 $('#livestream_scanner').modal('hide');
             },
-            configureScanner: function(selector) {
+            configureScanner: function (selector) {
                 if (!this._scanner) {
                     this._scanner = Quagga
                         .decoder(
@@ -1528,9 +1535,10 @@
         };
         App.init();
     }
+
     barcodeScan();
 
-    $('#new_branch_id').change(function() {
+    $('#new_branch_id').change(function () {
         var id = $(this).val();
         var selector = '';
 
@@ -1559,7 +1567,7 @@
         $('#new_subcategory_id').html('').selectpicker('refresh');
     });
 
-    $('#new_category_id').change(function() {
+    $('#new_category_id').change(function () {
         var id = $(this).val();
         var selector = '';
 
@@ -1588,7 +1596,7 @@
     });
 
     $('input[type="file"]').prop('required', true);
-    $(function() {
+    $(function () {
         appValidateForm($('form'), {
             new_product_name: "required",
             new_product_code: "required",
