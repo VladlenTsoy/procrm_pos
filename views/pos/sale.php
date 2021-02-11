@@ -237,10 +237,10 @@
                                     <?php echo render_select('new_branch_id', $branches_list, ['id', 'name'], 'product_branch'); ?>
                                 </div>
                                 <div class="col-md-4">
-                                    <?php echo render_select('new_category_id', '', ['id', 'name'], 'product_category', '', ['title' => 'first_select_branch']); ?>
+                                    <?php echo render_select('new_category_id', [], ['id', 'name'], 'product_category', '', ['title' => 'first_select_branch']); ?>
                                 </div>
                                 <div class="col-md-4">
-                                    <?php echo render_select('new_subcategory_id', '', ['id', 'name'], 'product_subcategory', '', ['title' => 'first_select_category']); ?>
+                                    <?php echo render_select('new_subcategory_id', [], ['id', 'name'], 'product_subcategory', '', ['title' => 'first_select_category']); ?>
                                 </div>
                             </div>
                             <div class="row">
@@ -482,12 +482,12 @@
                             <div class="col-md-6">
                                 <i class="fa fa-question-circle pull-left" data-toggle="tooltip"
                                     data-title="<?php echo _l('first_select_branch'); ?>"></i>
-                                <?php echo render_select('category_id', '', ['id', 'name'], 'category', !empty(set_value('category_id')) ? set_value('category_id') : $product->category_id ?? '', ['title' => 'first_select_branch']); ?>
+                                <?php echo render_select('category_id', [], ['id', 'name'], 'category', !empty(set_value('category_id')) ? set_value('category_id') : $product->category_id ?? '', ['title' => 'first_select_branch']); ?>
                             </div>
                             <div class="col-md-6">
                                 <i class="fa fa-question-circle pull-left" data-toggle="tooltip"
                                     data-title="<?php echo _l('first_select_category'); ?>"></i>
-                                <?php echo render_select('subcategory_id', '', ['id', 'name'], 'subcategory', !empty(set_value('subcategory_id')) ? set_value('subcategory_id') : $product->subcategory_id ?? '', ['title' => 'first_select_category']); ?>
+                                <?php echo render_select('subcategory_id', [], ['id', 'name'], 'subcategory', !empty(set_value('subcategory_id')) ? set_value('subcategory_id') : $product->subcategory_id ?? '', ['title' => 'first_select_category']); ?>
                             </div>
                             <div class="col-md-12 mt-1 table-container">
                                 <div id="products-list">
